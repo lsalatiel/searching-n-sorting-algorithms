@@ -23,6 +23,7 @@ int main() {
 
     time = clock() - time;
     double time_taken = ((double)time)/CLOCKS_PER_SEC;
+    printf("%f\n", time_taken);
 
     for(int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
