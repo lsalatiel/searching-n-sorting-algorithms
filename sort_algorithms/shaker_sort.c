@@ -3,7 +3,7 @@
 
 void sort(Item *a, int lo, int hi) {
     int swapped = 1;
-    int end = hi - 1;
+    int end = hi;
     int start = lo;
 
     while(swapped) {
