@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void sort(Item *a, int lo, int hi) {
-    for(int i = lo; i < hi - 1; i++) {
+    for(int i = lo; i < hi; i++) {
         if(less(a[i + 1], a[i])) 
             exch(a[i + 1], a[i])
         else {
