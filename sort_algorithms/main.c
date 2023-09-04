@@ -3,12 +3,13 @@
 #include "item.h"
 #include <time.h>
 
+// hi - the last index of the array
 extern void sort(Item *a, int lo, int hi);
 
 int main() {
-    int n;
+    int n = 1000;
 
-    scanf("%d", &n);
+    // scanf("%d", &n);
 
     int *arr = malloc(n * sizeof(int));
 
@@ -19,7 +20,7 @@ int main() {
     clock_t time = clock();
     time = clock();
 
-    sort(arr, 0, n);
+    sort(arr, 0, n - 1);
 
     time = clock() - time;
     double time_taken = ((double)time)/CLOCKS_PER_SEC;
