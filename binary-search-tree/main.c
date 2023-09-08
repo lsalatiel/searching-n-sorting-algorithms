@@ -19,6 +19,8 @@ int main() {
 
     binary_tree_preorder_traversal(bt);
 
+    binary_tree_inorder_traversal(bt);
+
     binary_tree_destroy(bt);
 
     return 0;
