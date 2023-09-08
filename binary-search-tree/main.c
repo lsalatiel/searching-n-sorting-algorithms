@@ -17,11 +17,14 @@ int main() {
         binary_tree_add(bt, key);
     }
 
+    printf("pre-order traversal:\n");
     binary_tree_preorder_traversal(bt);
 
+    printf("in-order traversal:\n");
     binary_tree_inorder_traversal(bt);
 
-    binary_tree_destroy(bt);
+    printf("post-order traversal:\n");
+    binary_tree_postorder_traversal(bt);
 
     return 0;
 }

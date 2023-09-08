@@ -13,4 +13,6 @@ void binary_tree_preorder_traversal(BinaryTree *bt);
 
 void binary_tree_inorder_traversal(BinaryTree *bt);
 
+void binary_tree_postorder_traversal(BinaryTree *bt);
+
 #endif

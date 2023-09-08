@@ -96,3 +96,16 @@ void binary_tree_inorder_traversal(BinaryTree *bt) {
     _binary_tree_inorder_traversal_recursive(bt->root);
     printf("\n");
 }
+
+void _binary_tree_postorder_traversal_recursive(Node *n) {
+    if(n == NULL) return;
+
+    _binary_tree_postorder_traversal_recursive(n->left);
+    _binary_tree_postorder_traversal_recursive(n->right);
+    printf("%d ", n->key);
+}
+
+void binary_tree_postorder_traversal(BinaryTree *bt) {
+    _binary_tree_postorder_traversal_recursive(bt->root);
+    printf("\n");
+}
