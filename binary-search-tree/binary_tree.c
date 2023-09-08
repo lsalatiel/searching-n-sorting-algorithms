@@ -1,4 +1,5 @@
 #include "binary_tree.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 typedef struct Node {
@@ -68,6 +69,18 @@ void binary_tree_destroy(BinaryTree *bt) {
     _binary_tree_destroy_recursive(bt->root);
 
     free(bt);
+}
+
+void _binary_tree_preorder_traversal_recursive(Node *n) {
+    if(n == NULL) return;
+
+    printf("%d ", n->key);
+    _binary_tree_preorder_traversal_recursive(n->left);
+    _binary_tree_preorder_traversal_recursive(n->right);
+}
+
+void binary_tree_preorder_traversal(BinaryTree *bt) {
+    _binary_tree_preorder_traversal_recursive(bt->root);
 }
 
 

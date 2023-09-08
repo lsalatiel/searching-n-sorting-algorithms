@@ -17,6 +17,8 @@ int main() {
         binary_tree_add(bt, key);
     }
 
+    binary_tree_preorder_traversal(bt);
+
     binary_tree_destroy(bt);
 
     return 0;
