@@ -2,7 +2,7 @@ CC = gcc
 override CFLAGS += -Wall -Wextra -g
 MAIN = main.c
 
-SORT_ALGORITHMS = selection insertion bubble shaker quick
+SORT_ALGORITHMS = selection insertion bubble shaker shell quick
 
 all: $(SORT_ALGORITHMS)
 
