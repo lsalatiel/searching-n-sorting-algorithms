@@ -7,9 +7,9 @@
 extern void sort(Item *a, int lo, int hi);
 
 int main() {
-    int n = 1000;
+    int n;
 
-    // scanf("%d", &n);
+    scanf("%d", &n);
 
     int *arr = malloc(n * sizeof(int));
 
