@@ -2,14 +2,17 @@
 #include <stdlib.h>
 
 void sort(Item *a, int lo, int hi) {
-    for(int i = lo; i < hi; i++) {
-        if(less(a[i + 1], a[i])) 
-            exch(a[i + 1], a[i])
-        else {
-            for(int j = i; j > 0; j--) {
-                if(less(a[j], a[j - 1]))
-                    exch(a[j], a[j - 1])
-            }
+    for (int i = hi; i > lo; i--)
+        compexch(a[i-1], a[i]);
+
+    for (int i = lo+2; i <= hi; i++) {
+        int j = i;
+        Item v = a[i];
+
+        while (less(v, a[j-1])) {
+            a[j] = a[j-1];
+            j--;
         }
+        a[j] = v;
     }
 }
