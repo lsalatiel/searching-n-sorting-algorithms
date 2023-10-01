@@ -81,8 +81,62 @@ void quick_sort(Item *a, int lo, int hi) {
     quick_sort(a, j+1, hi);
 }
 
+
+typedef struct {
+   int *a;
+   int size;
+} Stack;
+
+Stack *stack_init(int size) {
+    Stack *stack = malloc(sizeof(Stack));
+    stack->a = malloc(size * sizeof(int));
+    stack->size = 0;
+
+    return stack;
+}
+
+void stack_push(Stack *stack, int item) {
+    stack->a[stack->size++] = item;
+}
+
+int stack_pop(Stack *stack) {
+    return stack->a[--stack->size];
+}
+
+int stack_empty(Stack *stack) {
+    return stack->size == 0;
+}
+
+void stack_destroy(Stack *stack) {
+    free(stack->a);
+    free(stack);
+}
+
+void quick_sort_iterative(Item *a, int lo, int hi) {
+    Stack *s = stack_init(hi-lo+1);
+    stack_push(s, hi); stack_push(s, lo);
+    while(!stack_empty(s)) {
+        lo = stack_pop(s); hi = stack_pop(s);
+        if (hi <= lo) continue; // Could add cutoff here.
+        int i = partition(a, lo, hi);
+        if (i-lo > hi-i) { // Test the size of sub-arrays.
+            stack_push(s, i-1); stack_push(s, lo); // Push the larger one.
+            stack_push(s, hi); stack_push(s, i+1); // Sort the smaller one first.
+        } else {
+            stack_push(s, hi); stack_push(s, i+1);
+            stack_push(s, i-1); stack_push(s, lo);
+        }
+    }
+
+    stack_destroy(s);
+}
+
 void sort(Item *a, int lo, int hi) {
-    shuffle(a, hi-lo+1);
+    #ifdef ITERATIVE
+    quick_sort_iterative(a, lo, hi);
+    #else
+    /* shuffle(a, hi-lo+1); */
     quick_sort(a, lo, hi);
+    #endif
 }
 
