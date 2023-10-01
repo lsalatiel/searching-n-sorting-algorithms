@@ -117,7 +117,18 @@ void quick_sort_iterative(Item *a, int lo, int hi) {
     stack_push(s, hi); stack_push(s, lo);
     while(!stack_empty(s)) {
         lo = stack_pop(s); hi = stack_pop(s);
+        #ifdef CUTOFF
+        if(hi <= lo + CUTOFF - 1) {
+            insertion_sort(a, lo, hi);
+            return;
+        } 
+        #else
         if (hi <= lo) continue; // Could add cutoff here.
+        #endif
+        #ifdef MEDIAN_OF_3
+        int median = median_of_3(a, lo, hi);
+        exch(a[lo], a[median])
+        #endif
         int i = partition(a, lo, hi);
         if (i-lo > hi-i) { // Test the size of sub-arrays.
             stack_push(s, i-1); stack_push(s, lo); // Push the larger one.
