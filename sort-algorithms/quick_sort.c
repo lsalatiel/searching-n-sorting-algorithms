@@ -76,9 +76,32 @@ void quick_sort(Item *a, int lo, int hi) {
     int median = median_of_3(a, lo, hi);
     exch(a[lo], a[median])
     #endif
+
+    #ifdef DIJKSTRA_3_WAY
+    Item v = a[lo];
+    int lt = lo, gt = hi, i = lo;
+
+    while (i <= gt) {
+        if (a[i] < v) {
+            exch(a[lt], a[i]);
+            lt++; i++;
+        }
+        else if (a[i] > v) {
+            exch(a[i], a[gt]);
+            gt--;
+        }
+        else {
+            i++;
+        }
+    }
+
+    quick_sort(a, lo, lt-1);
+    quick_sort(a, gt+1, hi);
+    #else
     int j = partition(a, lo, hi);
     quick_sort(a, lo, j-1);
     quick_sort(a, j+1, hi);
+    #endif
 }
 
 
@@ -133,7 +156,8 @@ void quick_sort_iterative(Item *a, int lo, int hi) {
         if (i-lo > hi-i) { // Test the size of sub-arrays.
             stack_push(s, i-1); stack_push(s, lo); // Push the larger one.
             stack_push(s, hi); stack_push(s, i+1); // Sort the smaller one first.
-        } else {
+        }
+        else {
             stack_push(s, hi); stack_push(s, i+1);
             stack_push(s, i-1); stack_push(s, lo);
         }
@@ -146,7 +170,7 @@ void sort(Item *a, int lo, int hi) {
     #ifdef ITERATIVE
     quick_sort_iterative(a, lo, hi);
     #else
-    /* shuffle(a, hi-lo+1); */
+    shuffle(a, hi-lo+1);
     quick_sort(a, lo, hi);
     #endif
 }
