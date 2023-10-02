@@ -1,6 +1,22 @@
 #include "item.h"
 #include <stdlib.h>
 
+void insertion_sort(Item *a, int lo, int hi) {
+    for (int i = hi; i > lo; i--)
+        compexch(a[i-1], a[i]);
+
+    for (int i = lo+2; i <= hi; i++) {
+        int j = i;
+        Item v = a[i];
+
+        while (less(v, a[j-1])) {
+            a[j] = a[j-1];
+            j--;
+        }
+        a[j] = v;
+    }
+}
+
 void merge(Item *a, Item *aux, int lo, int mid, int hi) {
     for(int k = 0; k <= hi; k++)
         aux[k] = a[k]; // Copy array
@@ -14,7 +30,14 @@ void merge(Item *a, Item *aux, int lo, int mid, int hi) {
 }
 
 void merge_sort(Item *a, Item *aux, int lo, int hi) {
+    #ifdef CUTOFF
+    if(hi <= lo + CUTOFF - 1) {
+        insertion_sort(a, lo, hi);
+        return;
+    }
+    #else
     if(hi <= lo) return;
+    #endif
     int mid = lo + (hi - lo) / 2; // Avoid overflow
     merge_sort(a, aux, lo, mid);
     merge_sort(a, aux, mid+1, hi);
