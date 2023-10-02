@@ -47,9 +47,29 @@ void merge_sort(Item *a, Item *aux, int lo, int hi) {
     merge(a, aux, lo, mid, hi);
 }
 
+#define SZ2 (sz+sz)
+#define MIN(X,Y) ((X < Y) ? (X) : (Y))
+
+void merge_sort_iterative(Item *a, int lo, int hi) {
+    int N = (hi - lo) + 1;
+    int y = N - 1;
+    Item *aux = malloc(N * sizeof(Item));
+    for (int sz = 1; sz < N; sz = SZ2) {
+        for (int lo = 0; lo < N-sz; lo += SZ2) {
+            int x = lo + SZ2 - 1;
+            merge(a, aux, lo, lo+sz-1, MIN(x,y));
+        }
+    }
+    free(aux);
+}
+
 void sort(Item *a, int lo, int hi) {
+    #ifdef ITERATIVE
+    merge_sort_iterative(a, lo, hi);
+    #else
     int n = (hi - lo) + 1;
     Item *aux = malloc(n * sizeof(Item));
     merge_sort(a, aux, lo, hi);
     free(aux);
+    #endif
 }
