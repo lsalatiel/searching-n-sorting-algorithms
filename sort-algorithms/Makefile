@@ -2,7 +2,7 @@ CC = gcc
 override CFLAGS += -Wall -Wextra -g
 MAIN = main.c
 
-SORT_ALGORITHMS = selection insertion bubble shaker shell quick
+SORT_ALGORITHMS = selection insertion bubble shaker shell merge quick
 
 MACRO ?= DEFAULT_VALUE
 
